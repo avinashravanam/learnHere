@@ -6,12 +6,15 @@ import java.util.Map;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-public class CustomOAuth2User implements OAuth2User{
+import com.example.demo.model.Provider;
+
+
+public class CustomOAuth2User  implements OAuth2User, CustomUser {
 
     private OAuth2User oAuth2User;
 
     public CustomOAuth2User(OAuth2User oAuth2User)
-    {
+    {   
         this.oAuth2User = oAuth2User;
     }
 
@@ -30,13 +33,13 @@ public class CustomOAuth2User implements OAuth2User{
     @Override
     public String getName() {
       
-        System.out.println(oAuth2User.toString());
         return oAuth2User.getAttribute("login");   //not all accouts having name attibute some having null
     }
 
-    public String getEmail()
-    {
-        return oAuth2User.getAttribute("email");
+    @Override
+    public Provider getProvider() {
+
+         return Provider.GITHUB;
     }
     
     

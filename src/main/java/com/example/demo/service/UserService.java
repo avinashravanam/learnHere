@@ -15,13 +15,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepo;
 
-    public void storeOauthPostLogin(String username)
+    public void storeOauthPostLogin(String username, Provider provider)
     {
-        Optional<User> existUser = userRepo.findUserByUsername(username);
-        System.out.println(username);
+        Optional<User> existUser = userRepo.findUserByUsernameAndProvider(username,provider);
         if(existUser.isPresent() == false)
         {
-            userRepo.save(new User(username,Provider.GITHUB));
+            userRepo.save(new User(username,provider));
             //save user in data base
         }
     }
