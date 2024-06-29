@@ -16,9 +16,8 @@ public class UserController {
     public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principle)
 	{
 		//generally authenticated user is stored in principle object here it is in Oath2Use
-		System.out.println(principle);
 		//it is not good idea to return a whole OAuth2User object 
-		return Collections.singletonMap("name", principle.getAttribute("name"));
+		return Collections.singletonMap("name", principle.getName());
 	}
     
 }
